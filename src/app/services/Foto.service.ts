@@ -6,9 +6,14 @@ import { FotoComponent } from "../components/foto/foto.component";
 @Injectable()
 export class FotoService {
 
-    constructor(private httpClient: HttpClient) {}
-
+    cabecalho: HttpHeaders
     URL: string = 'http://localhost:3000/v1/fotos'
+
+    constructor(private httpClient: HttpClient) {
+        this.cabecalho = new HttpHeaders({
+            'Content-Type': 'application/json'
+        })
+    }    
 
     lista(): Observable<Object> {
         return this
@@ -18,14 +23,10 @@ export class FotoService {
 
     cadastrar(foto: FotoComponent): Observable<Object> {
 
-        const cabecalho = new HttpHeaders({
-            'Content-Type': 'application/json'
-        })
-    
         return this.httpClient.post(this.URL,
         JSON.stringify(foto),
         {
-        headers: cabecalho
+        headers: this.cabecalho
         })
 
     }
@@ -33,5 +34,19 @@ export class FotoService {
     deletar(idFoto: string): Observable<Object> {
         return this.httpClient.delete(`${this.URL}/${idFoto}`,
         { observe: 'response'})
+    }
+
+    pegaFotoPorId(idFoto: string): Observable<Object> {
+        console.log("Recuperando foto...", idFoto)
+        return this.httpClient.get(`${this.URL}/${idFoto}`,
+        { observe: 'response'})
+    }
+
+    alterar(id: string, foto: FotoComponent) {
+        return this.httpClient.put(`${this.URL}/${id}`, JSON.stringify(foto),
+        {
+        headers: this.cabecalho
+        }
+    )
     }
 }

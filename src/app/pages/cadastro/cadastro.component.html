@@ -1,15 +1,21 @@
 <div class="container">
-  <form (submit)="cadastraFoto($event)">
+
+  <form (submit)="cadastraFoto($event)" [formGroup]="formCadastro">
     <div class="form-group">
       <label for="url">URL</label>
       <input 
-        type="text" 
+        type="text"
+        formControlName="url"
         [(ngModel)]="foto.url"
         (input)="foto.url = $event.target.value"
-        name="url" 
+        name="url"
         class="form-control" 
         id="url" 
         placeholder="Não digite varios nada">
+    </div>
+    <!-- url.invalid && !ur.pristine -->
+    <div class="alert alert-danger" *ngIf="formCadastro.controls.url.invalid" role="alert">
+      <strong>Preencha o campo!</strong>
     </div>
     <div class="form-group">
       <label for="titulo">Titulo</label>

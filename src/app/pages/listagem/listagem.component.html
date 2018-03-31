@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Caelumpic</a>
+  
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/']">Fotos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/cadastro']">Cadastro</a>
+      </li>
+    </ul>
+  
+    <div class="navbar" id="navbarColor02">
+      <form class="form-inline">
+        <input #inputDaBusca (input)="0" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+<titulo texto="{{ texto | uppercase }}"></titulo>
+
+<div class="container">
+    <div class="row">
+        <card class="col-md-4 col-sm-4 col-xs-12" 
+            *ngFor="let foto of fotos | filtraPorTitulo: inputDaBusca.value" 
+            titulo="{{ foto.titulo }}" 
+            descricao="{{ foto.descricao }}">
+            <foto
+            url="{{ foto.url }}"
+            descricao="{{ foto.descricao }}"
+            titulo="{{ foto.titulo }}"></foto>
+            <button type="button" class="btn btn-danger" (click)="removeFoto(foto._id)">
+              Remover
+            </button>
+        </card>
+    </div>
+</div>

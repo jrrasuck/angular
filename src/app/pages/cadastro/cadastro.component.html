@@ -1,0 +1,43 @@
+<div class="container">
+  <form (submit)="cadastraFoto($event)">
+    <div class="form-group">
+      <label for="url">URL</label>
+      <input 
+        type="text" 
+        [(ngModel)]="foto.url"
+        (input)="foto.url = $event.target.value"
+        name="url" 
+        class="form-control" 
+        id="url" 
+        placeholder="Não digite varios nada">
+    </div>
+    <div class="form-group">
+      <label for="titulo">Titulo</label>
+      <input       
+        type="text"
+        [(ngModel)]="foto.titulo"
+        name="titulo" 
+        class="form-control" 
+        id="titulo" 
+        placeholder="Não digite varios nada">
+    </div>
+    <div class="form-group">
+      <label for="descricao">Descricao</label>
+      <textarea 
+        name="descricao" 
+        [(ngModel)]="foto.descricao"
+        class="form-control" 
+        id="descricao" 
+        placeholder="Não digite varios nada">
+      </textarea>
+    </div>
+    <button type="submit" class="btn btn-success">
+      Cadastrar fotinhas!
+    </button>
+    <a [routerLink]="['/']">Voltar</a> 
+
+  </form>
+  {{ foto.titulo }}
+  <foto [url]="foto.url"></foto>
+  {{ foto.descricao }}
+</div>
